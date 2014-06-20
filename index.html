@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ember.js • TodoMVC</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <script type="text/x-handlebars" data-template-name="users">
+    <section id="todoapp">
+
+
+
+      <header id="header">
+        <h1>User todos</h1>
+      </header>
+
+      <nav>
+        {{#link-to "users.index"}}Home{{/link-to}}
+        {{#link-to "users.new"}}New User{{/link-to}}
+      </nav>
+
+      <section id="main">
+        {{outlet}}
+      </section>
+    </section>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="users/index">
+    <ul id="user-list">
+     {{#each}}
+      <li>
+          <label>User: {{#link-to 'user' this}}{{name}}{{/link-to}}</label>
+          <h3>Tasks</h3>
+          <ul id="todo-list">
+          {{#each todo in tasks}}
+            <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
+              {{input type="checkbox" checked=isCompleted class="toggle"}}
+              <br>{{todo.title}}</br>
+            </li>
+          {{/each}}
+          </ul>
+          </br>
+      </li>
+      {{/each}}
+    </ul>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="users/new">
+      <h2>New user frm</h2>
+      {{input type="text" id="new-user" placeholder="User name" 
+              value=newName action="createUser"}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="user">
+      <h2>Add todo</h2>
+      {{name}}
+      <ul id="todo-list">
+      {{#each todo in tasks}}
+        <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
+          {{input type="checkbox" checked=isCompleted class="toggle"}}
+          <br>{{todo.title}}</br>
+        </li>
+      {{/each}}
+      </ul>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="error">
+      <h2>uh oh, something went wrong!!</h2>
+      <h3>{{model}}</h3>
+    </script>
+
+    <script src="js/libs/jquery-1.10.2.min.js"></script>
+    <script src="js/libs/handlebars-1.0.0.js"></script>
+    <script src="js/libs/ember.js"></script>
+    <script src="js/libs/ember-data.js"></script>
+    <script src="js/application.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/models/todo.js"></script>
+    <script src="js/models/user.js"></script>
+    <script src="js/controllers/todos_controller.js"></script>
+    <script src="js/controllers/todo_controller.js"></script>
+    <script src="js/controllers/users_controller.js"></script>
+    <script src="js/controllers/users_new_controller.js"></script>
+    <script src="js/controllers/user_controller.js"></script>
+    <script src="js/views/edit_todo_views.js"></script>
+  </body>
+</html>
